@@ -582,8 +582,8 @@ instance Binary UUID where
 -- I want when used with the HStringTemplate library.
 instance Data UUID where
     toConstr uu  = mkConstr uuidType (show uu) [] (error "fixity")
-    gunfold k z _ = k (k (k (k (z UUID))))
-    gfoldl k z (UUID a1 a2 a3 a4) = ((((z UUID `k` a1) `k` a2) `k` a3) `k` a4)
+    gunfold k z _ = k (k (z UUID))
+    gfoldl k z (UUID a1 a2) = ((z UUID `k` a1) `k` a2)
     dataTypeOf _ = uuidType
 
 uuidType :: DataType
